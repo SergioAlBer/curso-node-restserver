@@ -2,7 +2,7 @@
 
 const { response } = require('express');
 
-//METODO GET : Obtener datos de un servidor sin modificar el estado del recurso.
+//METODO GET : Lectura en recursos 
 const usuariosGet = (req = request, res = response) => {
     const { q, nombre = 'no envia ', apikey
 } = req.query;
@@ -13,7 +13,7 @@ q,
     apikey
     });
 }
-//METODO PUT: Actualizar toda la información de un recurso. (id es el identificador de usuario)
+//METODO PUT: Actualizar un recurso o definir 1 nuevo 
 const usuariosPut = (req, res = response) => {
     const { id } = req.params; // params puede traer muchos datos.
     res.json({

@@ -1,4 +1,6 @@
-//IMPORTAMOS FUNCION ROUTER 
+//CONFIGURAR EL ENRUTADOR 
+
+//IMPORTAMOS FUNCION ROUTER DE SERVERS
 const { Router } = require('express');
 //IMPORTAMOS CONTROLADORES 
 const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete, usuariosPatch } =
