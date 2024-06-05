@@ -21,7 +21,7 @@ const usuariosPut = (req, res = response) => {
         id
     });
 }
-//METODO POST: Enviar datos al servidor para crear un nuevo recurso.
+//METODO POST: Enviar datos al servidor 
 const usuariosPost = (req, res = response) => {
     const { nombre, edad } = req.body;
     res.json({
