@@ -26,8 +26,8 @@ const usuariosPost = (req, res = response) => {
     const { nombre, edad } = req.body;
     res.json({
         msg: 'post API - controller',
-    nombre:'dffdf',
-        edad
+    nombre:'Gisela',
+        edad:'27'
 });
 }
 //METODO DELETE :  Eliminar datos de un servidor.
