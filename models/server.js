@@ -1,12 +1,16 @@
+//CLASE SERVER configurar servidor express y middleware para CORS, parseo JSON y sirve contenido
+//estaticos 
 
+//uso framework express: solicitudes HTTP
+// MIDDLEWARE CORS: Permite acceso al servidor de solicitudes 
 const express = require('express');
 const cors = require('cors');
 
-class Server {
+class Server { //<--------
     constructor() {
         this.app = express();
-        this.port = process.env.PORT;
-        this.usuariosPath = '/api/usuarios';
+        this.port = process.env.PORT;//asignar puerto 
+        this.usuariosPath = '/api/usuarios';//ruta de usuarios 
         // Middleware
         this.middlewares();
 
@@ -15,23 +19,24 @@ class Server {
     }
 
     routes() {
+        //ruta api/usuarios en routers/usuarios 
         this.app.use(this.usuariosPath, require('../routers/usuarios'))
     }
 
     middlewares() {
-        //CORS
+        //CORS: permitir solicitudes 
         this.app.use(cors());
-        //lectura y parseo del body recibe lo que se envia
+        //lectura y parseo del body (cuerpos json)
         this.app.use(express.json());
-        //directorio publico
+        //directorio publico de contenido estatico (html)
         this.app.use(express.static('public'));
     }
 
-    listen() {
+    listen() {//inicia el servidor y define el puerto 
         this.app.listen(this.port, () => {
             console.log('Servidor corriendo en puerto', this.port);
         });
     }
 }
 
-module.exports = Server;
+module.exports = Server;//exportamos server.js
