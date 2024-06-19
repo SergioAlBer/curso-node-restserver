@@ -1,7 +1,8 @@
 //CLASE SERVER para configurar servidor express 
 
 const express = require('express');
-const cors = require('cors'); //MIDDLEWARE para CORS: Controlar que dominios puede realizar solicitudes a nuestra API
+const cors = require('cors'); 
+const { dbConnection } = require('../database/config');
 
 class Server { //<--------
     constructor() {
@@ -9,13 +10,15 @@ class Server { //<--------
         this.port = process.env.PORT;
         this.usuariosPath = '/api/usuarios';
         
-        // Middleware
+        //llamada a conectarDB
+        this.conectarDB();
         this.middlewares();
-
-        // Rutas de la aplicación
         this.routes();
     }
 
+    async conectarDB() {
+        await dbConnection();
+    }
     routes() {
         //DEFINIMOS LA ruta api/usuarios en routers/usuarios 
         this.app.use(this.usuariosPath, require('../routers/usuarios'))
