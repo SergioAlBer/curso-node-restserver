@@ -1,3 +1,4 @@
+//FUNCION PARA LA CONEXION CON LAS BASE DE DATOS 
 const mongoose = require('mongoose');
 const dbConnection = async() =>{
     try {

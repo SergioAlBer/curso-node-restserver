@@ -1,3 +1,4 @@
+//VERIFICAR INCONSISTENCIAS DE DUPLICIDAD DE CORREO O FALTA DE ROLES
 const Role = require('../models/role');
 const Usuario = require('../models/usuarios');
 
