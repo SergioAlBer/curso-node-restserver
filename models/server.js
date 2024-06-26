@@ -1,4 +1,4 @@
-//CLASE SERVER para configurar servidor express 
+//CLASE SERVER para configurar servidor expres
 
 const express = require('express');
 const cors = require('cors'); 
