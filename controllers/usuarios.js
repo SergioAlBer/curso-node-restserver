@@ -6,17 +6,27 @@ const Usuario = require('../models/usuarios');
 const { validationResult } = require('express-validator');
 
 //METODO GET : Lectura en recursos 
-const usuariosGet = (req = request, res = response) => {
-    const { q, nombre = 'no envia ', apikey
-    } = req.query;
+const usuariosGet = async(req = request, res = response) =>{
+    // const {q,nombre = &#39;no envia&#39;,apikey} = req.query;
+    const { limite = 5, desde = 0 } = req.query; // indicamos que vamos ha recibir un parametro: li, con volor por defecto 5
+    const query = { estado: true };
+    const [total, usuarios] = await Promise.all([
+        Usuario.countDocuments(query), //retorna total
+        Usuario.find(query) //retorna los usuarios
+            .skip(Number(desde))
+            .limit(Number(limite))
+    ]);
     res.json({
-        msg: 'get API - controller',
-        q,
-        nombre,
-        apikey
+        total,
+        usuarios
     });
-}
+    //encuentra desde al limite registros de la DB
+    /* const usuarios = await Usuario.find(query)
+         .skip(Number(desde))
+         .limit(Number(limite));
+     const total = await Usuario.countDocuments(query); */
 
+}
 
 //METODO PUT: Actualizar un recurso o definir 1 nuevo 
 const usuariosPut = async (req, res = response) => {
@@ -73,12 +83,17 @@ const usuariosPost = async (req, res = response) => {
     });
 }
 //METODO DELETE :  Eliminar datos de un servidor.
-const usuariosDelete = (req, res = response) => {
+const usuariosDelete = async(req, res = response) =>{
+    const { id } = req.params;
+    //borrado fisico.
+    //const usuario = await Usuario.findByIdAndDelete(id);
+    //borrado logico:
+    const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
     res.json({
-        msg: 'delete API - controller'
+        usuario
     });
-
 }
+
 //METODO PAT: Actualizar solo algunos campos de un recurso.
 const usuariosPatch = (req, res = response) => {
     res.json({
