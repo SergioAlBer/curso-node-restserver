@@ -22,7 +22,7 @@ const usuariosGet = (req = request, res = response) => {
 const usuariosPut = async (req, res = response) => {
     const { id } = req.params; // params puede traer muchos datos.
     // Excluyo password, google y correo (no se actualizan) y todo lo demás lo almaceno en resto
-    const { password, google, correo, ...resto } = req.body;
+    const { _id,password, google, correo, ...resto } = req.body;
 
     // POR HACER: validar id contra la DB
     if (password) {

@@ -8,13 +8,18 @@ const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete, usuariosPatch } 
     require('../controllers/usuarios');
 const { validarCampos } = require('../middlewares/validar-campo');
 
-const { esRoleValido, emailExiste} = require('../helpers/db-validators');
+const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
 
 
 //DEFINIMOS EL ENRUTADOR PARA MANEJO DE CONTROLADORES HTTP
 const router = Router();
 router.get('/', usuariosGet )
-router.put('/:id', usuariosPut);
+router.put('/:id',[
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+    check('rol').custom(esRoleValido),
+    validarCampos
+], usuariosPut );
 
 
 router.post('/', [
