@@ -13,13 +13,15 @@ const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db
 
 //DEFINIMOS EL ENRUTADOR PARA MANEJO DE CONTROLADORES HTTP
 const router = Router();
-router.get('/', usuariosGet )
-router.put('/:id',[
-    check('id', 'No es un ID valido').isMongoId(),
-    check('id').custom(existeUsuarioPorId),
-    check('rol').custom(esRoleValido),
-    validarCampos
-], usuariosPut );
+
+router.get('/', usuariosGet)
+
+     router.put('/:id',[
+            check('id', 'No es un ID valido').isMongoId(),
+            check('id').custom(existeUsuarioPorId),
+            check('rol').custom(esRoleValido),
+            validarCampos
+        ], usuariosPut );
 
 
 router.post('/', [

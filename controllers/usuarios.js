@@ -8,11 +8,12 @@ const { validationResult } = require('express-validator');
 //METODO GET : Lectura en recursos 
 const usuariosGet = async(req = request, res = response) =>{
     // const {q,nombre = &#39;no envia&#39;,apikey} = req.query;
+   
     const { limite = 5, desde = 0 } = req.query; // indicamos que vamos ha recibir un parametro: li, con volor por defecto 5
     const query = { estado: true };
     const [total, usuarios] = await Promise.all([
         Usuario.countDocuments(query), //retorna total
-        Usuario.find(query) //retorna los usuari
+        Usuario.find(query) //retorna los usuariOS
             .skip(Number(desde))
             .limit(Number(limite))
     ]);

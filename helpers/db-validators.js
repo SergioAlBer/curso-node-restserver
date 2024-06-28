@@ -8,7 +8,13 @@ const esRoleValido = async(rol ='') => {
     }
 
 }
+const existeUsuarioPorId = async (id) => {
+    const existeUsuario = await Usuario.findById(id);
+    if (!existeUsuario) {
+        throw new Error(`El Usuario con  ${id} no existe en la DB`)
 
+    };
+}
 const emailExiste = async (correo = '') => {
     const existeEmail = await Usuario.findOne({ correo });
     if (existeEmail) {
@@ -16,13 +22,7 @@ const emailExiste = async (correo = '') => {
     }
 }
 
-const existeUsuarioPorId = async(id) => {
-    const existeUsuario = await Usuario.findById(id);
-    if (!existeUsuario) {
-        throw new Error(`El Usuario con  ${id} no existe en la DB`)
 
-    };
-}
 module.exports = {
     esRoleValido,
     emailExiste,
