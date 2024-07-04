@@ -9,6 +9,7 @@ class Server { //<--------
         this.app = express();
         this.port = process.env.PORT || 3000;
         this.usuariosPath = '/api/usuarios';
+        this.authPath = '/api/auth'
         
         //llamada a conectarDB
         this.conectarDB();
@@ -22,6 +23,7 @@ class Server { //<--------
     routes() {
         //DEFINIMOS LA ruta api/usuarios en routers/usuarios 
         this.app.use(this.usuariosPath, require('../routers/usuarios'))
+        this.app.use(this.authPath, require('../routers/auth'));
     }
 
     middlewares() {
